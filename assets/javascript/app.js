@@ -1,154 +1,74 @@
+
+$(document).ready(function () {
 // $(document).ready (function() {
 //GLOBAL VARIABLES
-var questionsArray = [{
-                            question1: "boom boom boom",
-                                answers: ["answer1", "answer2", "answer3", "answer4"],
-                                correctAns: answers[3]
-                            },
-                            {question2: "boom boom boom",
-                                answers: ["answer1", "answer2", "answer3", "answer4"],
-                                correctAns: answers[1]
-                            },
-                            {question3: "boom boom boom",
-                                answers: ["answer1", "answer2", "answer3", "answer4"],
-                                correctAns: answers[2]
-                            },
-                            {question4: "boom boom boom",
-                                answers: ["answer1", "answer2", "answer3", "answer4"],
-                                correctAns: answers[4]
-                            },
-                            {question5: "boom boom boom",
-                                answers: ["answer1", "answer2", "answer3", "answer4"],
-                                correctAns: answers[3]
-                            },
-                        ];
-                        // console.log(questionsArray.question1.correctAns);
-var clock;   
+var questionsArray = ["Which came first?", "What was the egg thinking?", "How many eggs do you eat for breakfast?", "What did the chicken name his egg?", "Why did the chicken cross the road?", "Knock Knock, who's there?"];
+var answersArray = [ ["chicken", "egg", "egbert", "whole foods"],
+["he wasn't", "about the chicken that gave him up for adoption", "about his friend, egbert", "2% milk"],
+["I'm vegan", "12", "oranic or regular?", "Trader Joe says he doesn't believe in eggs."],
+["egbert!", "eggbert", "cheese", "ed"],
+["to buy a gallon of 2% milk", "to get to your house", "to have an affair", "to use the bathroom"],
+["egbert", "ed", "gerald", "the chicken!"] ];
 
-var trivia = {
+var time = 10;
+var timer;
+var clearTime;
+var score = 0;
+var questionsLeft = 0;
+// var incorrect = 0;
+// var questionsLeft = -1;
 
-    score: 0,
-    clockCount: 60,
+$("#ques").append("<div><button>START</button></div>");
 
-    // time: 60,   
+$("#start").on("click", quiz, check);
 
-    count: function() {
-        trivia.clockCount--;
-        $("#clock").text(trivia.clockCount);
-        
-    },
-        
-    start: function() {
-        // watch.time = 60;
-        // intervalId = setInterval(watch.count, 1000);
-        clock = setInterval(trivia.clockCount, 60000);
-        
-    },
-        
-        
-        reset: function() {
-            if (time === 0) {
-                timesUp();
-            }
-        }
-
+function quiz() {
+    questionsLeft++;
+    $("#clock").text(time);
+    clearInterval(clearTime);
+    if (questionsLeft < questionsArray.length) {
+        qna(questionsArray[questionsLeft], answersArray[questionsLeft]);
     }
-     
-     
-function start() {
-    $("#start").on("click", function() { 
-    var score = 0;
-    
-  
-})
 }
-
-//start button on click sets off first timer & first question
-//timer goes off 60 sec
-
-function reset() {
-    
-    start();
-      
-}
-
-function timesUp() {
-    $("#timesup").text("POO")
-    $(".lol").attr('src', 'assets/images/pileofpoo.png')
-
-    //show time up screen, 
-    //score stays the same
-    //next question button
-}
-
-
-
-
-    function yay() {
-        //A;SLDKFJ LOL SHOW CELEBRATION EMOJI 
-        //NEXT QUESTION BUTTON
+function check() {
+    clearTime();
+    if (event.target.id == answersArray[0]) {
         score++;
-        $(".lol").attr('src', 'assets/images/celebration.png')
+    } 
+}
 
-    }
-
-    function ohno() {
-            //lol show poop emoji
-            //next question button
-           score--;
-           $(".lol").attr('src', 'assets/images/bamemoji.png')
-
-    }
-    //start function lol also questionsLeft = true
-
-    // $("#next").on("click" (displayQuestion) {
-
-        //only use next until questionsLeft = false
-    //uhhhhh somehow make this reusable maybe lol try loop in loop in loop
-    // var questionsLeft = false
-
-//  while (!questionsLeft) {
-
-    // questionsLeft = true; 
-
-    for (var n = 0; n < questionsArray; n++ ) {
-        $("#timer").text(watch);
-        $("#qna").text(questionsArray[n]);
-        $("#qna").append(questionsArray[n].answers[0]);
-        $("#qna").append(questionsArray[n].answers[1]);
-        $("#qna").append(questionsArray[n].answers[2]);
-        $("#qna").append(questionsArray[n].answers[3]);
-    
-    }
+function clock() {
+    clearInterval(timer);
+    clock = setInterval(10000);
+    $("#clock").text(time);
 
     if (time === 0) {
-        timesUp();
+        clearTime();
     }
+}
 
-    $(".answers").on("click", function(){
-        if (userAnswer === correctAns) {
-            yay();
-        } else {
-            ohno();
-        }
-    })
+function clearTime() {
+    clearInterval(clock);
+    time = 10;
+    $("#clock").text(time);
+}
+function qna() {
+    $("#quiz").text(question);
+    for (var n = 1; n < answer.length; n++) {
+        ("#quiz").append("<div><button id=" + (index)  + answer[n] + "</button></div>");
 
-                    
-    // return $("finalScore").text(score);
+    };
+};
 
-         
-
-        
-
-   
-    // reset();
-    
-
-    //uhhhhh maybe this can maybe go in the maybe display question function lol maybe probably who knows 
-    //q[n] start timer 60 sec, show question and multiple choices.
-
+function reset() {
+    clearInterval(time);
+    clearInterval(timer);
+    $("#clock").text("");
+    $("#quiz").text(score + incorrect);
+};
 
 
-        
-     
 
+
+
+})

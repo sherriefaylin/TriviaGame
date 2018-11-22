@@ -243,3 +243,4 @@ function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
     previousButton.addEventListener("click", showPreviousSlide);
     nextButton.addEventListener("click", showNextSlide);
   })();
+

@@ -1,43 +1,50 @@
 // $(document).ready (function() {
 //GLOBAL VARIABLES
-var questionsArray = {
-                            question1: {
+var questionsArray = [{
+                            question1: "boom boom boom",
                                 answers: ["answer1", "answer2", "answer3", "answer4"],
                                 correctAns: answers[3]
                             },
-                            question2: {
+                            {question2: "boom boom boom",
                                 answers: ["answer1", "answer2", "answer3", "answer4"],
                                 correctAns: answers[1]
                             },
-                            question3: {
+                            {question3: "boom boom boom",
                                 answers: ["answer1", "answer2", "answer3", "answer4"],
                                 correctAns: answers[2]
                             },
-                            question4: {
+                            {question4: "boom boom boom",
                                 answers: ["answer1", "answer2", "answer3", "answer4"],
                                 correctAns: answers[4]
                             },
-                            question5: {
+                            {question5: "boom boom boom",
                                 answers: ["answer1", "answer2", "answer3", "answer4"],
                                 correctAns: answers[3]
                             },
-                        }
+                        ];
                         // console.log(questionsArray.question1.correctAns);
-var intervalId;   
+var clock;   
 
-var watch = {
-    time: 60,   
+var trivia = {
 
+    score: 0,
+    clockCount: 60,
+
+    // time: 60,   
+
+    count: function() {
+        trivia.clockCount--;
+        $("#clock").text(trivia.clockCount);
         
-        start: function() {
-            watch.time = 60;
-            intervalId = setInterval(watch.count, 1000);
-        },
+    },
         
-        count: function() {
-            watch.time--;
-            $("#timer").text(time);
-        },
+    start: function() {
+        // watch.time = 60;
+        // intervalId = setInterval(watch.count, 1000);
+        clock = setInterval(trivia.clockCount, 60000);
+        
+    },
+        
         
         reset: function() {
             if (time === 0) {
